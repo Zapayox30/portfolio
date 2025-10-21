@@ -4,6 +4,7 @@ import { OrbitControls, Sphere, MeshDistortMaterial, Stars } from '@react-three/
 import { Suspense } from 'react'
 import { slideInFromBottom, bounceIn, floatingAnimation, pulseAnimation, buttonHover } from '../../utils/animations'
 import TypingEffect from '../TypingEffect'
+import FloatingLogos from '../FloatingLogos'
 
 const AnimatedSphere = () => {
   return (
@@ -29,13 +30,14 @@ const Hero = () => {
       <div className="absolute inset-0 z-0 opacity-90">
         <Canvas camera={{ position: [0, 0, 5] }}>
           <Suspense fallback={null}>
-            <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+            <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
             <ambientLight intensity={0.4} />
             <directionalLight position={[10, 10, 5]} intensity={1.2} color="#ffffff" />
             <pointLight position={[-10, -10, -5]} intensity={0.8} color="#00d4ff" />
             <pointLight position={[5, -5, 2]} intensity={0.6} color="#a855f7" />
             <AnimatedSphere />
-            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.4} />
+            <FloatingLogos />
+            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.2} />
           </Suspense>
         </Canvas>
       </div>
