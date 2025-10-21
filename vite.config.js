@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react'
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
+  base: '/',
   server: {
     port: 3000,
     open: true,
@@ -13,6 +14,8 @@ export default defineConfig({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
+    minify: 'esbuild',
+    target: 'es2015',
     rollupOptions: {
       output: {
         manualChunks: {
@@ -27,9 +30,6 @@ export default defineConfig({
     include: ['three', '@react-three/fiber', '@react-three/drei', 'framer-motion']
   },
   esbuild: {
-    drop: ['console', 'debugger']
-  },
-  css: {
-    postcss: false
+    drop: process.env.NODE_ENV === 'production' ? ['console', 'debugger'] : []
   }
 })

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a2e;
+            color: white;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .status {
+            background: #16213e;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        .success { border-left: 4px solid #00d4ff; }
+        .error { border-left: 4px solid #ff4757; }
+        code {
+            background: #0f0f23;
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Debug - Portfolio Deployment</h1>
+        
+        <div class="status success">
+            <h3>✅ Build Status</h3>
+            <p>Si puedes ver esta página, significa que:</p>
+            <ul>
+                <li>El build de Vite se completó correctamente</li>
+                <li>Los archivos se desplegaron en Netlify</li>
+                <li>Las rutas básicas funcionan</li>
+            </ul>
+        </div>
+
+        <div class="status">
+            <h3>🚀 Próximos pasos</h3>
+            <p>Si el sitio principal muestra pantalla negra:</p>
+            <ol>
+                <li>Verifica la consola del navegador (F12)</li>
+                <li>Revisa los errores de JavaScript</li>
+                <li>Confirma que todas las dependencias se cargaron</li>
+            </ol>
+        </div>
+
+        <div class="status">
+            <h3>🔗 Enlaces útiles</h3>
+            <ul>
+                <li><a href="/" style="color: #00d4ff;">← Volver al portfolio</a></li>
+                <li><a href="/debug.html" style="color: #00d4ff;">Esta página de debug</a></li>
+            </ul>
+        </div>
+
+        <div class="status">
+            <h3>📊 Información técnica</h3>
+            <p><strong>Framework:</strong> React + Vite</p>
+            <p><strong>Deployment:</strong> Netlify</p>
+            <p><strong>Build time:</strong> <span id="buildTime"></span></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('buildTime').textContent = new Date().toLocaleString();
+        
+        // Test básico de JavaScript
+        console.log('✅ JavaScript funcionando correctamente');
+        console.log('🔧 Debug page loaded at:', new Date().toISOString());
+        
+        // Verificar si React está disponible
+        if (typeof React !== 'undefined') {
+            console.log('✅ React está disponible');
+        } else {
+            console.log('❌ React no está disponible');
+        }
+    </script>
+</body>
+</html>

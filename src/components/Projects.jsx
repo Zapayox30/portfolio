@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { staggerContainer, fadeInUp, cardHover, rotateIn } from '../utils/animations'
 
 const Projects = () => {
   const projects = [
@@ -46,16 +47,18 @@ const Projects = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+          {...staggerContainer}
+        >
           {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              className="card group cursor-pointer"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              className="card group cursor-pointer overflow-hidden"
+              {...fadeInUp}
+              {...cardHover}
               transition={{ duration: 0.8, delay: index * 0.2 }}
               viewport={{ once: true }}
-              whileHover={{ y: -10 }}
             >
               <div className="relative overflow-hidden rounded-lg mb-4">
                 <div className="w-full h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
@@ -103,7 +106,7 @@ const Projects = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )

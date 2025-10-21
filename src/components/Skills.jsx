@@ -1,4 +1,25 @@
 import { motion } from 'framer-motion'
+import { staggerContainer, fadeInUp, skillBarAnimation, cardHover } from '../utils/animations'
+
+const SkillBar = ({ name, level, delay = 0 }) => {
+  return (
+    <div className="mb-4">
+      <div className="flex justify-between mb-2">
+        <span className="text-sm font-medium text-gray-300">{name}</span>
+        <span className="text-sm text-gray-400">{level}%</span>
+      </div>
+      <div className="w-full bg-gray-700 rounded-full h-2 overflow-hidden">
+        <motion.div
+          className="h-2 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-600 rounded-full"
+          initial={{ width: 0 }}
+          whileInView={{ width: `${level}%` }}
+          transition={{ duration: 1.5, delay, ease: "easeOut" }}
+          viewport={{ once: true }}
+        />
+      </div>
+    </div>
+  )
+}
 
 const Skills = () => {
   const skillCategories = [
@@ -52,41 +73,35 @@ const Skills = () => {
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <motion.div 
+          className="grid md:grid-cols-3 gap-8"
+          {...staggerContainer}
+        >
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
               className="card"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              {...fadeInUp}
+              {...cardHover}
               transition={{ duration: 0.8, delay: categoryIndex * 0.2 }}
               viewport={{ once: true }}
             >
-              <h3 className="text-2xl font-semibold mb-6 text-gradient">
+              <h3 className="text-2xl font-semibold mb-6 gradient-text">
                 {category.title}
               </h3>
               <div className="space-y-4">
                 {category.skills.map((skill, skillIndex) => (
-                  <div key={skill.name}>
-                    <div className="flex justify-between mb-2">
-                      <span className="text-white font-medium">{skill.name}</span>
-                      <span className="text-gray-400">{skill.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-700 rounded-full h-2">
-                      <motion.div
-                        className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full"
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${skill.level}%` }}
-                        transition={{ duration: 1, delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
-                        viewport={{ once: true }}
-                      />
-                    </div>
-                  </div>
+                  <SkillBar
+                    key={skill.name}
+                    name={skill.name}
+                    level={skill.level}
+                    delay={skillIndex * 0.1 + categoryIndex * 0.3}
+                  />
                 ))}
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   )
