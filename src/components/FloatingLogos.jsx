@@ -9,7 +9,8 @@ const FloatingLogo = ({ position, children, rotationSpeed = 1 }) => {
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += rotationSpeed * 0.01
-      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.2
+      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime + position[0]) * 0.3
+      meshRef.current.position.x = position[0] + Math.cos(state.clock.elapsedTime * 0.5 + position[2]) * 0.2
     }
   })
 
@@ -18,15 +19,15 @@ const FloatingLogo = ({ position, children, rotationSpeed = 1 }) => {
       <Html
         transform
         occlude
-        scale={0.5}
+        scale={0.3}
         position={[0, 0, 0]}
         style={{
           transition: 'all 0.2s',
-          opacity: 0.8,
+          opacity: 0.9,
           transform: 'translate3d(-50%, -50%, 0)'
         }}
       >
-        <div className="bg-white/10 backdrop-blur-sm rounded-lg p-3 border border-white/20 hover:bg-white/20 transition-all duration-300">
+        <div className="bg-white/15 backdrop-blur-sm rounded-full p-1.5 border border-white/20 hover:bg-white/25 transition-all duration-300 shadow-xl">
           {children}
         </div>
       </Html>
@@ -38,7 +39,7 @@ const FloatingLogos = () => {
   const logos = useMemo(() => [
     {
       name: 'HTML5',
-      position: [-4, 2, -2],
+      position: [-3, 1, -1],
       color: '#E34F26',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#E34F26">
@@ -48,7 +49,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'CSS3',
-      position: [4, 1.5, -1],
+      position: [3, 0.5, -0.5],
       color: '#1572B6',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#1572B6">
@@ -58,7 +59,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'JavaScript',
-      position: [-3, -1, 1],
+      position: [-2, -0.5, 0.5],
       color: '#F7DF1E',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#F7DF1E">
@@ -68,7 +69,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'Python',
-      position: [3, -2, 0],
+      position: [2, -1, 0],
       color: '#3776AB',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#3776AB">
@@ -78,7 +79,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'Java',
-      position: [-2, 3, -3],
+      position: [-1.5, 2, -1],
       color: '#ED8B00',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#ED8B00">
@@ -88,7 +89,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'React',
-      position: [2, 3.5, 2],
+      position: [1.5, 2, 1],
       color: '#61DAFB',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#61DAFB">
@@ -98,7 +99,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'Git',
-      position: [-4, -2.5, 2],
+      position: [-2.5, -1.5, 1],
       color: '#F05032',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#F05032">
@@ -108,7 +109,7 @@ const FloatingLogos = () => {
     },
     {
       name: 'Firebase',
-      position: [4.5, 0, -2],
+      position: [2.5, 0, -1],
       color: '#FFCA28',
       icon: (
         <svg width="40" height="40" viewBox="0 0 24 24" fill="#FFCA28">
@@ -127,10 +128,7 @@ const FloatingLogos = () => {
           position={logo.position}
           rotationSpeed={0.5 + index * 0.2}
         >
-          <div className="flex flex-col items-center space-y-2">
-            {logo.icon}
-            <span className="text-xs font-medium text-white/80">{logo.name}</span>
-          </div>
+          {logo.icon}
         </FloatingLogo>
       ))}
     </>
