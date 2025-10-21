@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import LoadingScreen from './components/LoadingScreen'
-import MouseEffects from './components/MouseEffects'
+import SimpleCursor from './components/SimpleCursor'
 
 // Lazy load section components for better performance
 const Hero = lazy(() => import('./components/sections/Hero'))
@@ -15,7 +15,7 @@ const Contact = lazy(() => import('./components/Contact'))
 function App() {
   return (
     <div className="min-h-screen text-white overflow-x-hidden">
-      <MouseEffects />
+      <SimpleCursor />
       <Navbar />
       
       <AnimatePresence mode="wait">

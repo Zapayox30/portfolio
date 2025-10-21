@@ -25,21 +25,21 @@ const MouseEffects = () => {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  // Optimizar actualización del mouse con throttling
+  // Optimizar actualización del mouse con throttling más agresivo
   const updateMousePosition = useCallback((e) => {
     const now = Date.now()
     
-    // Throttle a 60fps máximo
-    if (now - lastUpdateTime.current < 16) return
+    // Throttle más agresivo - 30fps máximo para mejor performance
+    if (now - lastUpdateTime.current < 33) return
     
     lastUpdateTime.current = now
     const newPosition = { x: e.clientX, y: e.clientY, timestamp: now }
     
     setMousePosition(newPosition)
     
-    // Actualizar trail con menos puntos para mejor performance
+    // Reducir trail a solo 3 puntos para máxima fluidez
     setTrail(prevTrail => {
-      const newTrail = [newPosition, ...prevTrail.slice(0, 8)]
+      const newTrail = [newPosition, ...prevTrail.slice(0, 2)]
       return newTrail
     })
   }, [])
@@ -98,8 +98,8 @@ const MouseEffects = () => {
   // Limpiar trail viejo para evitar acumulación
   useEffect(() => {
     const cleanup = setInterval(() => {
-      setTrail(prev => prev.slice(0, 6)) // Mantener solo los últimos 6 puntos
-    }, 100)
+      setTrail(prev => prev.slice(0, 3)) // Mantener solo los últimos 3 puntos
+    }, 150)
 
     return () => clearInterval(cleanup)
   }, [])
@@ -144,18 +144,17 @@ const MouseEffects = () => {
         }}
       />
 
-      {/* Trail de puntos simplificado */}
+      {/* Trail de puntos ultra simplificado */}
       <div className="fixed inset-0 pointer-events-none z-30">
-        {trail.slice(0, 5).map((position, index) => (
+        {trail.slice(0, 3).map((position, index) => (
           <div
             key={`${position.timestamp}-${index}`}
-            className="absolute w-1 h-1 rounded-full bg-cyan-400"
+            className="absolute w-0.5 h-0.5 rounded-full bg-cyan-400"
             style={{
-              left: position.x - 1,
-              top: position.y - 1,
-              opacity: 0.6 - (index * 0.12),
-              transform: `scale(${1 - (index * 0.15)})`,
-              transition: 'opacity 0.1s ease-out, transform 0.1s ease-out'
+              left: position.x,
+              top: position.y,
+              opacity: 0.5 - (index * 0.15),
+              transform: `scale(${1 - (index * 0.2)})`,
             }}
           />
         ))}
