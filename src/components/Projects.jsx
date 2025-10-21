@@ -4,27 +4,27 @@ import { staggerContainer, fadeInUp, cardHover, rotateIn } from '../utils/animat
 const Projects = () => {
   const projects = [
     {
-      title: 'E-commerce Platform',
-      description: 'Plataforma de comercio electrónico completa con carrito de compras, pagos y gestión de inventario.',
-      technologies: ['React', 'Node.js', 'MongoDB', 'Stripe'],
+      title: 'Pomodomate.com',
+      description: 'Aplicación web basada en la técnica Pomodoro para mejorar la productividad. Incluye temporizadores personalizables, estadísticas de sesiones y interfaz intuitiva.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Firebase'],
       image: '/api/placeholder/400/250',
-      github: '#',
+      github: 'https://github.com/Zapayox30',
+      demo: 'https://pomodomate.com'
+    },
+    {
+      title: 'Sistema de Inventario Automatizado',
+      description: 'Sistema desarrollado en Excel con macros y automatización para gestión de inventario de negocio familiar. Incluye reportes y análisis de datos.',
+      technologies: ['Excel', 'VBA', 'Power BI', 'SQL'],
+      image: '/api/placeholder/400/250',
+      github: 'https://github.com/Zapayox30',
       demo: '#'
     },
     {
-      title: 'Task Management App',
-      description: 'Aplicación de gestión de tareas con funcionalidades de colaboración en tiempo real.',
-      technologies: ['React', 'Socket.io', 'Express', 'PostgreSQL'],
+      title: 'Proyecto Educativo Inclusivo',
+      description: 'Proyecto multimedia educativo orientado a niños con TEA (Trastorno del Espectro Autista). Colaboración en desarrollo de contenido interactivo.',
+      technologies: ['HTML5', 'CSS3', 'JavaScript', 'Adobe Suite'],
       image: '/api/placeholder/400/250',
-      github: '#',
-      demo: '#'
-    },
-    {
-      title: 'Weather Dashboard',
-      description: 'Dashboard meteorológico con visualizaciones interactivas y pronósticos detallados.',
-      technologies: ['React', 'D3.js', 'OpenWeather API', 'Tailwind'],
-      image: '/api/placeholder/400/250',
-      github: '#',
+      github: 'https://github.com/Zapayox30',
       demo: '#'
     }
   ]

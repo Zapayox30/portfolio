@@ -19,7 +19,7 @@ const LoadingScreen = () => {
           animate={{ opacity: [0.7, 1, 0.7] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
-          Sandro Reátegui
+          Sandro Fernando Reátegui
         </motion.h2>
         <motion.p
           className="text-cyan-300 text-lg"

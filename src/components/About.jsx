@@ -29,19 +29,20 @@ const About = () => {
             <div className="card">
               <h3 className="text-2xl font-semibold mb-4 gradient-text">Mi Historia</h3>
               <p className="text-gray-300 mb-4">
-                Soy un desarrollador Full Stack con pasión por crear soluciones web innovadoras. 
-                Mi experiencia abarca desde el desarrollo frontend con React hasta la implementación 
-                de APIs robustas con Python y Node.js.
+                Soy <strong>Sandro Fernando Reátegui Giles</strong>, desarrollador de software con formación en 
+                <strong> Ingeniería de Sistemas</strong> en la Universidad Privada San Juan Bautista. 
+                Me apasiona crear soluciones digitales que combinan funcionalidad y diseño excepcional.
               </p>
               <p className="text-gray-300 mb-4">
-                Me especializo en transformar ideas complejas en aplicaciones web intuitivas y 
-                eficientes, siempre manteniéndome actualizado con las últimas tecnologías y 
-                mejores prácticas del desarrollo web.
+                Cuento con experiencia práctica desarrollando aplicaciones web como <strong>Pomodomate.com</strong>, 
+                un proyecto propio basado en la técnica Pomodoro, y he implementado sistemas automatizados 
+                de inventario para negocios, además de colaborar en proyectos multimedia educativos inclusivos 
+                orientados a niños con TEA.
               </p>
               <p className="text-gray-300">
-                Cuando no estoy programando, disfruto aprendiendo nuevas tecnologías, 
-                contribuyendo a proyectos de código abierto y compartiendo conocimiento 
-                con la comunidad de desarrolladores.
+                Me considero una persona orientada a resultados, con gran interés en la innovación tecnológica, 
+                el desarrollo web moderno y la creación de experiencias digitales centradas en el usuario. 
+                Hablo español nativo e inglés intermedio técnico.
               </p>
             </div>
           </motion.div>
@@ -57,23 +58,30 @@ const About = () => {
               <div className="space-y-6">
                 <div className="border-l-2 border-blue-500 pl-4">
                   <h4 className="font-semibold text-white">Desarrollador Full Stack</h4>
-                  <p className="text-blue-400 text-sm">2022 - Presente</p>
+                  <p className="text-blue-400 text-sm">2023 - Presente</p>
                   <p className="text-gray-300 text-sm mt-2">
-                    Desarrollo de aplicaciones web modernas con React, Node.js y Python
+                    Desarrollo de Pomodomate.com y otras aplicaciones web con tecnologías modernas
                   </p>
                 </div>
                 <div className="border-l-2 border-purple-500 pl-4">
-                  <h4 className="font-semibold text-white">Desarrollador Frontend</h4>
-                  <p className="text-purple-400 text-sm">2021 - 2022</p>
+                  <h4 className="font-semibold text-white">Desarrollador de Sistemas</h4>
+                  <p className="text-purple-400 text-sm">2022 - 2023</p>
                   <p className="text-gray-300 text-sm mt-2">
-                    Especialización en interfaces de usuario responsivas y experiencia del usuario
+                    Implementación de sistema automatizado de inventario en Excel para negocio familiar
                   </p>
                 </div>
                 <div className="border-l-2 border-green-500 pl-4">
-                  <h4 className="font-semibold text-white">Estudiante Autodidacta</h4>
-                  <p className="text-green-400 text-sm">2020 - 2021</p>
+                  <h4 className="font-semibold text-white">Colaborador en Proyecto Educativo</h4>
+                  <p className="text-green-400 text-sm">2022</p>
                   <p className="text-gray-300 text-sm mt-2">
-                    Aprendizaje intensivo de tecnologías web y programación
+                    Proyecto multimedia educativo inclusivo orientado a niños con TEA
+                  </p>
+                </div>
+                <div className="border-l-2 border-cyan-500 pl-4">
+                  <h4 className="font-semibold text-white">Estudiante de Ingeniería de Sistemas</h4>
+                  <p className="text-cyan-400 text-sm">Universidad Privada San Juan Bautista</p>
+                  <p className="text-gray-300 text-sm mt-2">
+                    Formación académica en desarrollo de software y sistemas
                   </p>
                 </div>
               </div>

@@ -67,7 +67,7 @@ const Hero = () => {
                 fontWeight: 'bold'
               }}
             >
-              Sandro
+              Sandro Fernando
             </span>
           </motion.h1>
 
@@ -77,7 +77,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
           >
-            Desarrollador Full Stack especializado en crear experiencias web modernas y funcionales
+            Desarrollador de Software e Ingeniero de Sistemas especializado en crear soluciones digitales que combinan funcionalidad y diseño
           </motion.p>
 
           <motion.div
@@ -88,10 +88,11 @@ const Hero = () => {
           >
             <TypingEffect 
               texts={[
-                "Creando aplicaciones React innovadoras",
-                "Desarrollando APIs robustas con Node.js",
-                "Diseñando experiencias de usuario únicas",
-                "Implementando soluciones escalables"
+                "Creador de Pomodomate.com",
+                "Desarrollando con HTML, CSS y JavaScript",
+                "Programando en Python, Java y C",
+                "Ingeniero de Sistemas en formación",
+                "Especialista en Excel y Power BI"
               ]}
               speed={80}
               deleteSpeed={40}
