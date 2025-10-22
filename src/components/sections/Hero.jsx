@@ -1,100 +1,121 @@
 import { motion } from 'framer-motion'
-import { Canvas } from '@react-three/fiber'
-import { OrbitControls, Sphere, MeshDistortMaterial, Stars } from '@react-three/drei'
-import { Suspense } from 'react'
-import { slideInFromBottom, bounceIn, floatingAnimation, pulseAnimation, buttonHover } from '../../utils/animations'
+import { slideInFromBottom, bounceIn, floatingAnimation, buttonHover } from '../../utils/animations'
 import TypingEffect from '../TypingEffect'
 import FloatingLogos from '../FloatingLogos'
 
-const AnimatedSphere = () => {
-  return (
-    <Sphere visible args={[1, 100, 200]} scale={2.5}>
-      <MeshDistortMaterial
-        color="#00d4ff"
-        attach="material"
-        distort={0.4}
-        speed={2}
-        roughness={0.1}
-        metalness={0.9}
-        emissive="#001122"
-        emissiveIntensity={0.2}
-      />
-    </Sphere>
-  )
-}
+const heroHighlights = [
+  {
+    title: 'Experiencias inmersivas',
+    description: 'Animaciones fluidas, microinteracciones y recorridos que hacen memorable cada flujo.',
+    accent: 'from-cyan-400 to-blue-500'
+  },
+  {
+    title: 'Entrega ágil',
+    description: 'Iteraciones rápidas con métricas claras y despliegues continuos listos para producción.',
+    accent: 'from-purple-400 to-pink-500'
+  },
+  {
+    title: 'Diseño centrado en el usuario',
+    description: 'Experiencias accesibles y adaptables en cualquier dispositivo, listas para escalar.',
+    accent: 'from-emerald-400 to-teal-500',
+    fullWidth: true
+  }
+]
+
+const heroMetrics = [
+  {
+    label: 'Proyectos entregados',
+    value: '15+'
+  },
+  {
+    label: 'Satisfacción del cliente',
+    value: '98%'
+  },
+  {
+    label: 'Tiempo de respuesta',
+    value: 'Menos de 24h'
+  }
+]
+
+const heroCallouts = [
+  {
+    badge: 'Stack principal',
+    title: 'React · Node.js · Python',
+    description: 'Automatizando procesos, integrando APIs y dashboards con datos en vivo.',
+    accent: 'from-cyan-400 to-blue-500',
+    position: 'left-6 top-6',
+    initialY: -24,
+    delay: 1.05
+  },
+  {
+    badge: 'Experiencia inmersiva',
+    title: 'Modelado 3D interactivo',
+    description: 'Escena optimizada con órbitas dinámicas y efectos suaves a 60fps.',
+    accent: 'from-purple-400 to-pink-500',
+    position: 'right-6 bottom-6',
+    initialY: 24,
+    delay: 1.2
+  }
+]
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-      {/* 3D Background */}
-      <div className="absolute inset-0 z-0 opacity-90">
-        <Canvas camera={{ position: [0, 0, 5] }}>
-          <Suspense fallback={null}>
-            <Stars radius={100} depth={50} count={3000} factor={4} saturation={0} fade speed={1} />
-            <ambientLight intensity={0.4} />
-            <directionalLight position={[10, 10, 5]} intensity={1.2} color="#ffffff" />
-            <pointLight position={[-10, -10, -5]} intensity={0.8} color="#00d4ff" />
-            <pointLight position={[5, -5, 2]} intensity={0.6} color="#a855f7" />
-            <AnimatedSphere />
-            <FloatingLogos />
-            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={0.2} />
-          </Suspense>
-        </Canvas>
+    <section className="relative overflow-hidden py-24">
+      <div className="absolute inset-0 -z-10 bg-gradient-to-b from-[#050510] via-[#08061a] to-[#050510]" />
+      <div className="absolute inset-0 -z-[5]">
+        <div className="pointer-events-none absolute left-1/2 top-[-30%] h-[42rem] w-[42rem] -translate-x-1/2 rounded-full bg-gradient-to-br from-cyan-400/25 via-transparent to-transparent blur-3xl opacity-90" />
+        <div className="pointer-events-none absolute right-[-18%] bottom-[-35%] h-[38rem] w-[38rem] rounded-full bg-gradient-to-tr from-purple-500/20 via-transparent to-transparent blur-3xl opacity-75" />
+        <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
       </div>
 
-      {/* Content */}
-      <div className="relative z-10 text-center max-w-4xl mx-auto px-4">
-        {/* Background overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/20 backdrop-blur-sm rounded-3xl -z-10"></div>
-        
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-16 px-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] md:items-center">
         <motion.div
           {...slideInFromBottom}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="py-12"
+          transition={{ duration: 0.75, delay: 0.2 }}
+          className="max-w-2xl space-y-8 rounded-[2rem] border border-white/10 bg-white/5 p-10 text-center backdrop-blur-xl shadow-[0_25px_55px_rgba(15,23,42,0.55)] md:text-left"
         >
+          <motion.span
+            className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-sm font-semibold uppercase tracking-widest text-cyan-200"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+          >
+            Desarrollo Full Stack & Diseño UI
+          </motion.span>
+
           <motion.h1
-            className="text-5xl md:text-7xl font-bold mb-6 drop-shadow-2xl"
+            className="text-5xl font-bold md:text-7xl"
             {...bounceIn}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.45 }}
           >
             Hola, soy{' '}
-            <span 
-              className="gradient-text"
-              style={{
-                background: 'linear-gradient(135deg, #00d4ff 0%, #5b86e5 50%, #a855f7 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
-                display: 'inline-block',
-                fontWeight: 'bold'
-              }}
-            >
-              Sandro Fernando
+            <span className="bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">
+              {' '}Sandro Fernando
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl text-gray-200 mb-4 max-w-2xl mx-auto drop-shadow-lg font-medium"
-            initial={{ opacity: 0, y: 30 }}
+            className="text-xl font-medium text-gray-200 md:text-2xl"
+            initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.6 }}
+            transition={{ duration: 0.75, delay: 0.6 }}
           >
-            Desarrollador de Software e Ingeniero de Sistemas especializado en crear soluciones digitales que combinan funcionalidad y diseño
+            Desarrollador de Software e Ingeniero de Sistemas enfocado en experiencias digitales fluidas, accesibles y con métricas que impulsan el crecimiento de tu producto.
           </motion.p>
 
           <motion.div
-            className="text-lg md:text-xl text-cyan-300 mb-8 font-medium"
+            className="text-lg font-medium text-cyan-300 md:text-xl"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
           >
-            <TypingEffect 
+            <TypingEffect
               texts={[
-                "Creador de Pomodomate.com",
-                "Desarrollando con HTML, CSS y JavaScript",
-                "Programando en Python, Java y C",
-                "Ingeniero de Sistemas en formación",
-                "Especialista en Excel y Power BI"
+                'Creador de Pomodomate.com',
+                'Experto en interfaces dinámicas con React y Tailwind',
+                'Integrando análisis de datos con Python y Power BI',
+                'Automatizando procesos con Java y C',
+                'Mentorando equipos y optimizando flujos de trabajo'
               ]}
               speed={80}
               deleteSpeed={40}
@@ -103,49 +124,115 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center"
+            className="flex flex-col items-center justify-center gap-4 sm:flex-row"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
+            transition={{ duration: 0.8, delay: 0.85 }}
           >
             <motion.a
               href="#proyectos"
-              className="gradient-bg text-white px-8 py-4 rounded-full font-semibold shadow-2xl hover:shadow-blue-500/25 transition-all duration-300 inline-flex items-center justify-center"
+              className="gradient-bg inline-flex items-center justify-center rounded-full px-8 py-4 font-semibold text-white shadow-2xl transition-all duration-300 hover:shadow-blue-500/25"
               {...buttonHover}
             >
               Ver mis proyectos
             </motion.a>
-            
+
             <motion.a
               href="#contacto"
-              className="border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm px-8 py-4 rounded-full font-semibold transition-all duration-300 inline-flex items-center justify-center"
+              className="inline-flex items-center justify-center rounded-full border-2 border-white/30 px-8 py-4 font-semibold text-white transition-all duration-300 hover:bg-white/10 backdrop-blur-sm"
               {...buttonHover}
             >
               Contactar
             </motion.a>
           </motion.div>
+
+          <motion.div
+            className="grid gap-4 pt-6 text-left sm:grid-cols-3"
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+          >
+            {heroMetrics.map((metric) => (
+              <div key={metric.label} className="rounded-2xl border border-white/10 bg-white/[0.08] p-4">
+                <p className="text-3xl font-bold text-white">{metric.value}</p>
+                <p className="mt-1 text-sm text-gray-300">{metric.label}</p>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
+
+        <div className="flex w-full flex-col gap-6">
+          <motion.div
+            className="relative h-[340px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-[0_35px_65px_rgba(15,23,42,0.55)] backdrop-blur-2xl md:h-[440px]"
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.95 }}
+          >
+            <FloatingLogos />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.18),transparent_55%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(192,132,252,0.2),transparent_60%)]" />
+
+            {heroCallouts.map((callout) => (
+              <motion.div
+                key={callout.badge}
+                className={`absolute ${callout.position} z-20 max-w-[220px]`}
+                initial={{ opacity: 0, y: callout.initialY }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: callout.delay }}
+              >
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: callout.delay + 0.6 }}
+                  className="rounded-2xl border border-white/15 bg-slate-900/65 p-4 shadow-[0_20px_45px_rgba(15,23,42,0.55)] backdrop-blur-xl"
+                >
+                  <span className={`inline-flex items-center rounded-full bg-gradient-to-r ${callout.accent} px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white shadow-lg`}>{callout.badge}</span>
+                  <h4 className="mt-3 text-lg font-semibold text-white">{callout.title}</h4>
+                  <p className="mt-1 text-sm text-gray-200">{callout.description}</p>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="grid gap-4 sm:grid-cols-2"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 1.35 }}
+          >
+            {heroHighlights.map((item) => (
+              <motion.div
+                key={item.title}
+                className={`relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.08] p-6 backdrop-blur-lg ${item.fullWidth ? 'sm:col-span-2' : ''}`}
+                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="pointer-events-none absolute inset-0 opacity-15">
+                  <div className={`absolute -top-16 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${item.accent} blur-3xl`} />
+                </div>
+                <div className="relative space-y-2">
+                  <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                  <p className="text-sm text-gray-200">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+        className="absolute bottom-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 1.2 }}
+        transition={{ duration: 0.8, delay: 1.1 }}
         {...floatingAnimation}
       >
-        <motion.div
-          className="w-6 h-10 border-2 border-white/30 rounded-full flex justify-center cursor-pointer"
-          whileHover={{ scale: 1.1, borderColor: "rgba(255,255,255,0.6)" }}
-          whileTap={{ scale: 0.9 }}
-        >
+        <div className="flex h-10 w-6 justify-center rounded-full border-2 border-white/30">
           <motion.div
             animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="w-1 h-3 bg-gradient-to-b from-cyan-400 to-blue-500 rounded-full mt-2"
+            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+            className="mt-2 h-3 w-1 rounded-full bg-gradient-to-b from-cyan-400 to-blue-500"
           />
-        </motion.div>
+        </div>
       </motion.div>
     </section>
   )
