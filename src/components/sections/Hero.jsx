@@ -42,19 +42,13 @@ const heroCallouts = [
     badge: 'Stack principal',
     title: 'React · Node.js · Python',
     description: 'Automatizando procesos, integrando APIs y dashboards con datos en vivo.',
-    accent: 'from-cyan-400 to-blue-500',
-    position: 'left-6 top-6',
-    initialY: -24,
-    delay: 1.05
+    accent: 'from-cyan-400 to-blue-500'
   },
   {
     badge: 'Experiencia inmersiva',
     title: 'Modelado 3D interactivo',
     description: 'Escena optimizada con órbitas dinámicas y efectos suaves a 60fps.',
-    accent: 'from-purple-400 to-pink-500',
-    position: 'right-6 bottom-6',
-    initialY: 24,
-    delay: 1.2
+    accent: 'from-purple-400 to-pink-500'
   }
 ]
 
@@ -72,7 +66,7 @@ const Hero = () => {
         <motion.div
           {...slideInFromBottom}
           transition={{ duration: 0.75, delay: 0.2 }}
-          className="max-w-2xl space-y-8 rounded-[2rem] border border-white/10 bg-white/5 p-10 text-center backdrop-blur-xl shadow-[0_25px_55px_rgba(15,23,42,0.55)] md:text-left"
+          className="max-w-2xl space-y-8 text-center md:text-left"
         >
           <motion.span
             className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-4 py-1 text-sm font-semibold uppercase tracking-widest text-cyan-200"
@@ -153,7 +147,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 1.1 }}
           >
             {heroMetrics.map((metric) => (
-              <div key={metric.label} className="rounded-2xl border border-white/10 bg-white/[0.08] p-4">
+              <div key={metric.label} className="rounded-2xl border border-white/10 bg-slate-900/60 p-4 backdrop-blur-xl">
                 <p className="text-3xl font-bold text-white">{metric.value}</p>
                 <p className="mt-1 text-sm text-gray-300">{metric.label}</p>
               </div>
@@ -161,34 +155,54 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        <div className="flex w-full flex-col gap-6">
+        <div className="flex w-full flex-col gap-8">
           <motion.div
-            className="relative h-[340px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-[0_35px_65px_rgba(15,23,42,0.55)] backdrop-blur-2xl md:h-[440px]"
-            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            className="group relative min-h-[320px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-slate-900/60 shadow-[0_35px_65px_rgba(15,23,42,0.55)] backdrop-blur-xl md:min-h-[420px]"
+            initial={{ opacity: 0, scale: 0.96, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 0.85, delay: 0.95 }}
           >
+            <div className="pointer-events-none absolute inset-0 opacity-80 mix-blend-screen">
+              <div className="absolute -left-24 top-16 h-64 w-64 rounded-full bg-cyan-400/20 blur-3xl" />
+              <div className="absolute -right-16 bottom-10 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl" />
+            </div>
             <FloatingLogos />
             <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.18),transparent_55%)]" />
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(192,132,252,0.2),transparent_60%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(192,132,252,0.18),transparent_60%)]" />
 
+            <div className="pointer-events-none absolute left-6 top-6 z-20 max-w-[220px] text-left text-white">
+              <span className="inline-flex items-center rounded-full bg-white/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-cyan-200">
+                Modelado 3D
+              </span>
+              <p className="mt-3 text-sm text-white/80">
+                Explora mi stack tecnológico en una escena ligera optimizada para cualquier dispositivo.
+              </p>
+            </div>
+          </motion.div>
+
+          <motion.div
+            className="grid gap-4 sm:grid-cols-2"
+            initial={{ opacity: 0, y: 36 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 1.2 }}
+          >
             {heroCallouts.map((callout) => (
               <motion.div
                 key={callout.badge}
-                className={`absolute ${callout.position} z-20 max-w-[220px]`}
-                initial={{ opacity: 0, y: callout.initialY }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: callout.delay }}
+                className="relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60 p-6 text-left backdrop-blur-xl"
+                whileHover={{ y: -4, scale: 1.01 }}
+                transition={{ duration: 0.25 }}
               >
-                <motion.div
-                  animate={{ y: [0, -12, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: callout.delay + 0.6 }}
-                  className="rounded-2xl border border-white/15 bg-slate-900/65 p-4 shadow-[0_20px_45px_rgba(15,23,42,0.55)] backdrop-blur-xl"
-                >
-                  <span className={`inline-flex items-center rounded-full bg-gradient-to-r ${callout.accent} px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white shadow-lg`}>{callout.badge}</span>
-                  <h4 className="mt-3 text-lg font-semibold text-white">{callout.title}</h4>
-                  <p className="mt-1 text-sm text-gray-200">{callout.description}</p>
-                </motion.div>
+                <div className="pointer-events-none absolute inset-0 opacity-20">
+                  <div className={`absolute -top-12 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${callout.accent} blur-3xl`} />
+                </div>
+                <div className="relative space-y-2">
+                  <span className={`inline-flex items-center rounded-full bg-gradient-to-r ${callout.accent} px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white shadow-lg`}>
+                    {callout.badge}
+                  </span>
+                  <h4 className="text-lg font-semibold text-white">{callout.title}</h4>
+                  <p className="text-sm text-gray-200">{callout.description}</p>
+                </div>
               </motion.div>
             ))}
           </motion.div>
@@ -202,11 +216,11 @@ const Hero = () => {
             {heroHighlights.map((item) => (
               <motion.div
                 key={item.title}
-                className={`relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.08] p-6 backdrop-blur-lg ${item.fullWidth ? 'sm:col-span-2' : ''}`}
+                className={`relative overflow-hidden rounded-3xl border border-white/10 bg-slate-900/60 p-6 backdrop-blur-xl transition-all ${item.fullWidth ? 'sm:col-span-2' : ''}`}
                 whileHover={{ y: -6, scale: 1.01 }}
                 transition={{ duration: 0.25 }}
               >
-                <div className="pointer-events-none absolute inset-0 opacity-15">
+                <div className="pointer-events-none absolute inset-0 opacity-20">
                   <div className={`absolute -top-16 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${item.accent} blur-3xl`} />
                 </div>
                 <div className="relative space-y-2">
