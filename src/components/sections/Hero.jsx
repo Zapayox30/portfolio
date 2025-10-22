@@ -36,6 +36,24 @@ const heroMetrics = [
   }
 ]
 
+const heroHighlights = [
+  {
+    title: 'Experiencias inmersivas',
+    description: 'Animaciones 3D ligeras y microinteracciones que elevan la usabilidad.',
+    accent: 'from-cyan-400 to-blue-500'
+  },
+  {
+    title: 'Entrega ágil',
+    description: 'Iteraciones rápidas con métricas claras y enfoque en resultados tangibles.',
+    accent: 'from-purple-400 to-pink-500'
+  },
+  {
+    title: 'Diseño centrado en el usuario',
+    description: 'Experiencias accesibles y adaptables en cualquier dispositivo.',
+    accent: 'from-emerald-400 to-teal-500'
+  }
+]
+
 const Hero = () => {
   return (
     <section className="relative overflow-hidden py-24">
