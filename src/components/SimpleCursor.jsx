@@ -1,59 +1,75 @@
-import { useState, useEffect, useRef, useCallback } from 'react'
-import { motion } from 'framer-motion'
+import { useState, useEffect, useMemo } from 'react'
+import { motion, useMotionValue, useSpring } from 'framer-motion'
+
+const INTERACTIVE_SELECTORS = 'a, button, [role="button"], input, textarea, select, .cursor-pointer'
 
 const SimpleCursor = () => {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
   const [isHovering, setIsHovering] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  
-  const lastUpdateTime = useRef(0)
 
-  // Detectar móvil
+  const cursorX = useMotionValue(-100)
+  const cursorY = useMotionValue(-100)
+  const cursorScale = useSpring(1, { stiffness: 420, damping: 26, mass: 0.65 })
+
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth <= 768 || 'ontouchstart' in window)
-    }
-    
-    checkMobile()
-    window.addEventListener('resize', checkMobile)
-    
-    return () => window.removeEventListener('resize', checkMobile)
-  }, [])
+    const prefersCoarsePointer = window.matchMedia('(pointer: coarse)').matches
+    const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0
 
-  // Actualización ultra optimizada del mouse
-  const updateMousePosition = useCallback((e) => {
-    const now = Date.now()
-    
-    // Throttle muy agresivo - solo 20fps
-    if (now - lastUpdateTime.current < 50) return
-    
-    lastUpdateTime.current = now
-    setMousePosition({ x: e.clientX, y: e.clientY })
-  }, [])
+    setIsMobile(prefersCoarsePointer || isTouchDevice || window.innerWidth <= 768)
 
-  const handleMouseEnter = useCallback((e) => {
-    if (e.target.matches('a, button, [role="button"], .cursor-pointer')) {
-      setIsHovering(true)
+    const handleResize = () => {
+      const updatedPrefersCoarsePointer = window.matchMedia('(pointer: coarse)').matches
+      setIsMobile(updatedPrefersCoarsePointer || window.innerWidth <= 768)
     }
-  }, [])
 
-  const handleMouseLeave = useCallback((e) => {
-    if (e.target.matches('a, button, [role="button"], .cursor-pointer')) {
-      setIsHovering(false)
-    }
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
   }, [])
 
   useEffect(() => {
-    window.addEventListener('mousemove', updateMousePosition, { passive: true })
-    document.addEventListener('mouseenter', handleMouseEnter, { passive: true, capture: true })
-    document.addEventListener('mouseleave', handleMouseLeave, { passive: true, capture: true })
+    if (isMobile) {
+      return undefined
+    }
+
+    const updateCursor = (event) => {
+      cursorX.set(event.clientX)
+      cursorY.set(event.clientY)
+    }
+
+    const handlePointerOver = (event) => {
+      const interactiveElement = event.target.closest(INTERACTIVE_SELECTORS)
+      if (interactiveElement) {
+        cursorScale.set(1.35)
+        setIsHovering(true)
+      }
+    }
+
+    const handlePointerOut = (event) => {
+      const interactiveElement = event.target.closest(INTERACTIVE_SELECTORS)
+      if (interactiveElement) {
+        cursorScale.set(1)
+        setIsHovering(false)
+      }
+    }
+
+    window.addEventListener('pointermove', updateCursor, { passive: true })
+    document.addEventListener('pointerover', handlePointerOver, true)
+    document.addEventListener('pointerout', handlePointerOut, true)
 
     return () => {
-      window.removeEventListener('mousemove', updateMousePosition)
-      document.removeEventListener('mouseenter', handleMouseEnter, true)
-      document.removeEventListener('mouseleave', handleMouseLeave, true)
+      window.removeEventListener('pointermove', updateCursor)
+      document.removeEventListener('pointerover', handlePointerOver, true)
+      document.removeEventListener('pointerout', handlePointerOut, true)
     }
-  }, [updateMousePosition, handleMouseEnter, handleMouseLeave])
+  }, [cursorX, cursorY, cursorScale, isMobile])
+
+  const cursorStyles = useMemo(
+    () => ({
+      transform: 'translate(-50%, -50%)',
+      mixBlendMode: 'difference'
+    }),
+    []
+  )
 
   if (isMobile) {
     return null
@@ -61,34 +77,19 @@ const SimpleCursor = () => {
 
   return (
     <>
-      {/* Cursor principal minimalista */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-50 w-2 h-2 rounded-full bg-white mix-blend-difference"
-        animate={{
-          x: mousePosition.x - 4,
-          y: mousePosition.y - 4,
-          scale: isHovering ? 1.5 : 1
-        }}
-        transition={{
-          type: "tween",
-          duration: 0.05,
-          ease: "linear"
-        }}
+        className="fixed top-0 left-0 pointer-events-none z-[60] w-3 h-3 rounded-full bg-white"
+        style={{ x: cursorX, y: cursorY, scale: cursorScale, ...cursorStyles }}
       />
 
-      {/* Cursor de seguimiento minimalista */}
       <motion.div
-        className="fixed top-0 left-0 pointer-events-none z-40 w-4 h-4 rounded-full border border-cyan-400"
-        animate={{
-          x: mousePosition.x - 8,
-          y: mousePosition.y - 8,
-          scale: isHovering ? 1.5 : 1,
-          opacity: isHovering ? 0.8 : 0.3
-        }}
-        transition={{
-          type: "tween",
-          duration: 0.15,
-          ease: "linear"
+        className="fixed top-0 left-0 pointer-events-none z-[55] w-12 h-12 rounded-full border border-cyan-300/70 bg-cyan-300/5 backdrop-blur-sm"
+        style={{
+          x: cursorX,
+          y: cursorY,
+          scale: cursorScale,
+          opacity: isHovering ? 0.8 : 0.4,
+          transform: 'translate(-50%, -50%)'
         }}
       />
     </>
