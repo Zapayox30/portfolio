@@ -9,10 +9,7 @@ const SimpleCursor = () => {
 
   const cursorX = useMotionValue(-100)
   const cursorY = useMotionValue(-100)
-
-  const smoothX = useSpring(cursorX, { stiffness: 300, damping: 30, mass: 0.6 })
-  const smoothY = useSpring(cursorY, { stiffness: 300, damping: 30, mass: 0.6 })
-  const cursorScale = useSpring(1, { stiffness: 250, damping: 25, mass: 0.8 })
+  const cursorScale = useSpring(1, { stiffness: 420, damping: 26, mass: 0.65 })
 
   useEffect(() => {
     const prefersCoarsePointer = window.matchMedia('(pointer: coarse)').matches
@@ -82,14 +79,14 @@ const SimpleCursor = () => {
     <>
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[60] w-3 h-3 rounded-full bg-white"
-        style={{ x: smoothX, y: smoothY, scale: cursorScale, ...cursorStyles }}
+        style={{ x: cursorX, y: cursorY, scale: cursorScale, ...cursorStyles }}
       />
 
       <motion.div
         className="fixed top-0 left-0 pointer-events-none z-[55] w-12 h-12 rounded-full border border-cyan-300/70 bg-cyan-300/5 backdrop-blur-sm"
         style={{
-          x: smoothX,
-          y: smoothY,
+          x: cursorX,
+          y: cursorY,
           scale: cursorScale,
           opacity: isHovering ? 0.8 : 0.4,
           transform: 'translate(-50%, -50%)'
