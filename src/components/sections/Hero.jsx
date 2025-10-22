@@ -6,18 +6,19 @@ import FloatingLogos from '../FloatingLogos'
 const heroHighlights = [
   {
     title: 'Experiencias inmersivas',
-    description: 'Animaciones fluidas y microinteracciones que elevan la usabilidad.',
+    description: 'Animaciones fluidas, microinteracciones y recorridos que hacen memorable cada flujo.',
     accent: 'from-cyan-400 to-blue-500'
   },
   {
     title: 'Entrega ágil',
-    description: 'Iteraciones rápidas con métricas claras y enfoque en resultados tangibles.',
+    description: 'Iteraciones rápidas con métricas claras y despliegues continuos listos para producción.',
     accent: 'from-purple-400 to-pink-500'
   },
   {
     title: 'Diseño centrado en el usuario',
-    description: 'Experiencias accesibles y adaptables en cualquier dispositivo.',
-    accent: 'from-emerald-400 to-teal-500'
+    description: 'Experiencias accesibles y adaptables en cualquier dispositivo, listas para escalar.',
+    accent: 'from-emerald-400 to-teal-500',
+    fullWidth: true
   }
 ]
 
@@ -36,6 +37,27 @@ const heroMetrics = [
   }
 ]
 
+const heroCallouts = [
+  {
+    badge: 'Stack principal',
+    title: 'React · Node.js · Python',
+    description: 'Automatizando procesos, integrando APIs y dashboards con datos en vivo.',
+    accent: 'from-cyan-400 to-blue-500',
+    position: 'left-6 top-6',
+    initialY: -24,
+    delay: 1.05
+  },
+  {
+    badge: 'Experiencia inmersiva',
+    title: 'Modelado 3D interactivo',
+    description: 'Escena optimizada con órbitas dinámicas y efectos suaves a 60fps.',
+    accent: 'from-purple-400 to-pink-500',
+    position: 'right-6 bottom-6',
+    initialY: 24,
+    delay: 1.2
+  }
+]
+
 const Hero = () => {
   return (
     <section className="relative overflow-hidden py-24">
@@ -46,9 +68,7 @@ const Hero = () => {
         <div className="absolute inset-x-0 top-0 h-64 bg-gradient-to-b from-black/40 via-transparent to-transparent" />
       </div>
 
-      <FloatingLogos />
-
-      <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-16 px-4 md:flex-row md:items-center md:justify-between">
+      <div className="relative z-10 mx-auto grid max-w-6xl gap-16 px-4 md:grid-cols-[minmax(0,1fr)_minmax(0,0.95fr)] md:items-center">
         <motion.div
           {...slideInFromBottom}
           transition={{ duration: 0.75, delay: 0.2 }}
@@ -80,8 +100,7 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.75, delay: 0.6 }}
           >
-            Desarrollador de Software e Ingeniero de Sistemas enfocado en experiencias digitales fluidas, accesibles y con
-            métricas que impulsan el crecimiento de tu producto.
+            Desarrollador de Software e Ingeniero de Sistemas enfocado en experiencias digitales fluidas, accesibles y con métricas que impulsan el crecimiento de tu producto.
           </motion.p>
 
           <motion.div
@@ -142,32 +161,64 @@ const Hero = () => {
           </motion.div>
         </motion.div>
 
-        <motion.div
-          className="grid w-full max-w-md gap-4 self-stretch md:max-w-lg"
-          initial={{ opacity: 0, scale: 0.9, y: 40 }}
-          animate={{ opacity: 1, scale: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-        >
-          {heroHighlights.map((item) => (
-            <motion.div
-              key={item.title}
-              className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.08] p-6 backdrop-blur-lg"
-              whileHover={{ y: -6, scale: 1.01 }}
-              transition={{ duration: 0.25 }}
-            >
-              <div className="pointer-events-none absolute inset-0 opacity-15">
-                <div className={`absolute -top-16 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${item.accent} blur-3xl`} />
-              </div>
-              <div className="relative space-y-2">
-                <h3 className="text-xl font-semibold text-white">{item.title}</h3>
-                <p className="text-sm text-gray-200">{item.description}</p>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
+        <div className="flex w-full flex-col gap-6">
+          <motion.div
+            className="relative h-[340px] overflow-hidden rounded-[2.5rem] border border-white/10 bg-white/5 shadow-[0_35px_65px_rgba(15,23,42,0.55)] backdrop-blur-2xl md:h-[440px]"
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 0.95 }}
+          >
+            <FloatingLogos />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(34,211,238,0.18),transparent_55%)]" />
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_80%_80%,rgba(192,132,252,0.2),transparent_60%)]" />
+
+            {heroCallouts.map((callout) => (
+              <motion.div
+                key={callout.badge}
+                className={`absolute ${callout.position} z-20 max-w-[220px]`}
+                initial={{ opacity: 0, y: callout.initialY }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: callout.delay }}
+              >
+                <motion.div
+                  animate={{ y: [0, -12, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: callout.delay + 0.6 }}
+                  className="rounded-2xl border border-white/15 bg-slate-900/65 p-4 shadow-[0_20px_45px_rgba(15,23,42,0.55)] backdrop-blur-xl"
+                >
+                  <span className={`inline-flex items-center rounded-full bg-gradient-to-r ${callout.accent} px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.3em] text-white shadow-lg`}>{callout.badge}</span>
+                  <h4 className="mt-3 text-lg font-semibold text-white">{callout.title}</h4>
+                  <p className="mt-1 text-sm text-gray-200">{callout.description}</p>
+                </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <motion.div
+            className="grid gap-4 sm:grid-cols-2"
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, delay: 1.35 }}
+          >
+            {heroHighlights.map((item) => (
+              <motion.div
+                key={item.title}
+                className={`relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.08] p-6 backdrop-blur-lg ${item.fullWidth ? 'sm:col-span-2' : ''}`}
+                whileHover={{ y: -6, scale: 1.01 }}
+                transition={{ duration: 0.25 }}
+              >
+                <div className="pointer-events-none absolute inset-0 opacity-15">
+                  <div className={`absolute -top-16 -right-10 h-36 w-36 rounded-full bg-gradient-to-br ${item.accent} blur-3xl`} />
+                </div>
+                <div className="relative space-y-2">
+                  <h3 className="text-xl font-semibold text-white">{item.title}</h3>
+                  <p className="text-sm text-gray-200">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
         initial={{ opacity: 0, y: 20 }}
