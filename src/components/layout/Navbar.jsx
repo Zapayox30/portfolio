@@ -10,8 +10,11 @@ const Navbar = () => {
   const navItems = [
     { name: 'Inicio', href: '#inicio' },
     { name: 'Sobre Mí', href: '#sobre-mi' },
+    { name: 'Destacados', href: '#destacados' },
+    { name: 'Experiencia', href: '#experiencia' },
     { name: 'Habilidades', href: '#habilidades' },
     { name: 'Proyectos', href: '#proyectos' },
+    { name: 'Testimonios', href: '#testimonios' },
     { name: 'Contacto', href: '#contacto' }
   ]
 
@@ -24,14 +27,10 @@ const Navbar = () => {
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex h-16 items-center justify-between">
           {/* Logo */}
-          <motion.div
-            className="flex-shrink-0"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
+          <motion.div className="flex-shrink-0" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
             <a href="#inicio" className="text-2xl font-bold gradient-text">
               SR
             </a>
@@ -44,7 +43,7 @@ const Navbar = () => {
                 <motion.a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-200 hover:bg-white/10 backdrop-blur-sm"
+                  className="rounded-full px-4 py-2 text-sm font-medium text-gray-300 transition-all duration-200 hover:bg-white/10 hover:text-white backdrop-blur-sm"
                   whileHover={{ y: -2, scale: 1.05 }}
                   whileTap={{ y: 0 }}
                 >
@@ -80,12 +79,12 @@ const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-dark-900/95 backdrop-blur-md rounded-lg mt-2">
+            <div className="mt-2 space-y-1 rounded-lg bg-dark-900/95 px-2 pt-2 pb-3 backdrop-blur-md sm:px-3">
               {navItems.map((item) => (
                 <a
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors duration-200"
+                  className="block rounded-md px-3 py-2 text-base font-medium text-gray-300 transition-colors duration-200 hover:text-white"
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {item.name}
